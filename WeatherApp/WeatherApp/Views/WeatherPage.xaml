@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Views.WeatherPage">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#2980b9">
+            <SearchBar
+                SearchCommand="{Binding SearchCommand}"
+                x:Name="search"
+                SearchCommandParameter="{Binding Text, Source={x:Reference search}}"
+                BackgroundColor="White"
+                Placeholder="Búsqueda por coordenadas"
+                Margin="15"
+            />
+            <Frame
+                Margin="25"
+                BackgroundColor="#3498d8"
+                VerticalOptions="FillAndExpand"
+            >
+                <Grid
+                    RowDefinitions=".2*, .6*, .2*"
+                >
+                    <Label
+                        Grid.Row="0"
+                        Text="{Binding Data.data[0].city_name}"
+                        TextColor="White"
+                        HorizontalTextAlignment="Center"
+                        FontSize="Large"
+                    />
+                    <StackLayout
+                        Grid.Row="1"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                    >
+                        <StackLayout
+                            Orientation="Horizontal"
+                            HorizontalOptions="Center"
+                        >
+                            <Image Source="{Binding Data.data[0].weather.icon, StringFormat='https://www.weatherbit.io/static/img/icons/{0}.png'}" />
+                            <Label
+                                Text="{Binding Data.data[0].weather.description}"
+                                FontSize="Large"
+                                TextColor="White"
+                                VerticalOptions="Center"
+                            />
+                        </StackLayout>
+                        <Label
+                            Text="{Binding Data.data[0].temp, StringFormat='{0}°'}"
+                            FontSize="60"
+                            TextColor="White"
+                            HorizontalTextAlignment="Center"
+                        />
+                    </StackLayout>
+                    <StackLayout
+                        Grid.Row="2"
+                        HorizontalOptions="Center"
+                    >
+                        <Label
+                            Text="{Binding Data.data[0].wind_spd, StringFormat='Velocidad del viento: {0} m/s'}"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                        />
+                        <Label
+                            Text="{Binding Data.data[0].rh, StringFormat='Humedad relativa: {0}%'}"
+                            TextColor="White"
+                            FontAttributes="Bold"
+                        />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
